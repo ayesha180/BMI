@@ -7,12 +7,27 @@ const Calculator = () => {
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [bmi, setBmi] = useState(null);
+  const [classification, setClassification] = useState('');
 
+  // Function to calculate BMI and classify the result
   const calculateBMI = () => {
     if (weight && height) {
-      const heightInMeters = height * 0.0254; // Convert height from inches to meters
+      const heightInMeters = height; // Height is already in meters
       const calculatedBMI = weight / (heightInMeters * heightInMeters);
+
+      // Set BMI value
       setBmi(calculatedBMI);
+
+      // Classify BMI into weight categories
+      if (calculatedBMI < 18.5) {
+        setClassification('Underweight');
+      } else if (calculatedBMI >= 18.5 && calculatedBMI <= 24.9) {
+        setClassification('Normal weight');
+      } else if (calculatedBMI >= 25 && calculatedBMI <= 29.9) {
+        setClassification('Overweight');
+      } else {
+        setClassification('Obese');
+      }
     }
   };
 
@@ -20,6 +35,7 @@ const Calculator = () => {
     setWeight('');
     setHeight('');
     setBmi(null);
+    setClassification('');
   };
 
   return (
@@ -31,13 +47,9 @@ const Calculator = () => {
         onChange={(e) => setWeight(e.target.value)}
       />
       <Input
-        label="Height (inches)"
+        label="Height (meters)"
         value={height}
-        onChange={(e) => {
-          if (e.target.value <= 120) {
-            setHeight(e.target.value); // Set height if it's less than or equal to 120
-          }
-        }}
+        onChange={(e) => setHeight(e.target.value)}
       />
       <button className="bmi-calculate-btn" onClick={calculateBMI}>
         Calculate BMI
@@ -45,7 +57,7 @@ const Calculator = () => {
       <button className="bmi-reset-btn" onClick={resetFields}>
         Reset
       </button>
-      <Result bmi={bmi} />
+      <Result bmi={bmi} classification={classification} />
     </div>
   );
 };

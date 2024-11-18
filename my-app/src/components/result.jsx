@@ -1,21 +1,16 @@
 import React from 'react';
-import '../App.css';
 
-const Result = ({ bmi }) => {
-  if (!bmi) return null;
-
-  let message;
-  if (bmi < 18.5) message = 'Underweight';
-  else if (bmi < 24.9) message = 'Normal weight';
-  else if (bmi < 29.9) message = 'Overweight';
-  else message = 'Obesity';
-
+const Result = ({ bmi, classification }) => {
   return (
     <div className="bmi-result">
-      <span>{message}</span> {/* Only display the BMI message */}
+      {bmi && (
+        <div>
+          <h2>Your BMI: {bmi.toFixed(2)}</h2>
+          <p>Classification: {classification}</p>
+        </div>
+      )}
     </div>
   );
 };
 
 export default Result;
-
