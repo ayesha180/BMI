@@ -12,9 +12,10 @@ const Result = ({ bmi }) => {
 
   return (
     <div className="bmi-result">
-      <span>Your BMI is: {bmi.toFixed(1)} ({message})</span>
+      <span>{message}</span> {/* Only display the BMI message */}
     </div>
   );
 };
 
 export default Result;
+

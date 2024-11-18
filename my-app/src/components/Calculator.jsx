@@ -10,10 +10,16 @@ const Calculator = () => {
 
   const calculateBMI = () => {
     if (weight && height) {
-      const heightInMeters = height / 100;
+      const heightInMeters = height * 0.0254; // Convert height from inches to meters
       const calculatedBMI = weight / (heightInMeters * heightInMeters);
       setBmi(calculatedBMI);
     }
+  };
+
+  const resetFields = () => {
+    setWeight('');
+    setHeight('');
+    setBmi(null);
   };
 
   return (
@@ -25,12 +31,19 @@ const Calculator = () => {
         onChange={(e) => setWeight(e.target.value)}
       />
       <Input
-        label="Height (cm)"
+        label="Height (inches)"
         value={height}
-        onChange={(e) => setHeight(e.target.value)}
+        onChange={(e) => {
+          if (e.target.value <= 120) {
+            setHeight(e.target.value); // Set height if it's less than or equal to 120
+          }
+        }}
       />
       <button className="bmi-calculate-btn" onClick={calculateBMI}>
         Calculate BMI
+      </button>
+      <button className="bmi-reset-btn" onClick={resetFields}>
+        Reset
       </button>
       <Result bmi={bmi} />
     </div>

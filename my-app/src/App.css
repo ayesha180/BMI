@@ -137,3 +137,21 @@ body {
     padding: 10px; /* Adjusted padding for smaller screens */
   }
 }
+/* Reset Button Styles */
+.bmi-reset-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.bmi-reset-btn:hover {
+  background-color: #c82333;
+}
