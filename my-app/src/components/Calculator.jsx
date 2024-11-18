@@ -9,16 +9,13 @@ const Calculator = () => {
   const [bmi, setBmi] = useState(null);
   const [classification, setClassification] = useState('');
 
-  // Function to calculate BMI and classify the result
   const calculateBMI = () => {
     if (weight && height) {
-      const heightInMeters = height; // Height is already in meters
+      const heightInMeters = height;
       const calculatedBMI = weight / (heightInMeters * heightInMeters);
 
-      // Set BMI value
       setBmi(calculatedBMI);
 
-      // Classify BMI into weight categories
       if (calculatedBMI < 18.5) {
         setClassification('Underweight');
       } else if (calculatedBMI >= 18.5 && calculatedBMI <= 24.9) {
